@@ -1,22 +1,32 @@
-import {useRef} from 'react'
+"use client"
+
+import { useRef } from 'react'
 import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
+import { useGSAP } from "@gsap/react";
+import './page.css'
 
-gsap.registerPlugin(useGSAP);
 
-const container  = useRef(null)
+function Page() {
+  const container = useRef(null);
+  const { contextSafe } = useGSAP({ scope: container });
 
 useGSAP(() => {
-  //gsap 코드 여기에?
-  gsap.to(".box",{x:360})
-})
+	// ✅ safe, created during execution, selector text scoped
+	gsap.to('.good', { x: 100 , y:300 });
+},{ scope: container });
 
-function page() {
-  return (
-    <div>
-      
-    </div>
-  )
+// ❌ Unsafe! Created on interaction and not wrapped in contextSafe()
+// animation will not be cleaned up
+// Selector text also isn't scoped to the container.
+const onClickGood = contextSafe(() => {
+	gsap.to('.good', { rotation: 180 });
+});
+
+return (
+	<div ref={container}>
+		<button onClick={onClickGood} className="good bg-sky-500">Hello world</button>
+	</div>
+);
 }
 
-export default page
+export default Page

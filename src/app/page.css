@@ -4,15 +4,13 @@ body{
   height: 100vh;
   background-color: #0d1117;
 }
+.container{
+  font-family: var(--font-jetbrains-mono);
+overflow: hidden;
+}
 
 .app {
   padding: 10px;
-}
-
-.box {
-  padding: 10px;
-  cursor: pointer;
-  margin: 0 auto;
 }
 
 .intro_keyword{
@@ -29,3 +27,16 @@ body{
 .intro_door_big{
   color:#3e54c4;
 }
+.text-container {
+  /* 2. 여기에 코드 블록의 최종 너비를 고정합니다. */
+  /* 이 값은 가장 긴 줄의 길이에 맞춰 조절해주세요. */
+  width: 34em; 
+}
+.line-1, .line-2, .line-3, .line-4, .line-5 {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  /* border-right-color를 transparent로 변경하여 기본적으로 숨김 */
+  border-right: 3px solid transparent; 
+}
+

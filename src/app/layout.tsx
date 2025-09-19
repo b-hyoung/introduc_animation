@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { jetbrains_mono } from './fonts'
+import { jetbrains_mono } from "./fonts";
 import "./globals.css";
 
 

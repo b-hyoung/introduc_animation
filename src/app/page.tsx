@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from 'react'
+import { useRef,useEffect } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from "@gsap/react";
 import './page.css'
@@ -13,18 +13,41 @@ function Page() {
   gsap.registerPlugin(ScrollTrigger); // 플러그인 등록
 
 
+//시작 화면 고정해서 새로고침 해도 출발위치로이동
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
+
+// // 핀 예시
+useGSAP(() => {
+  ScrollTrigger.create({
+    trigger:".intro_first",
+    start:"top top",
+    end : "+=30%" ,//intro_first를 화면에 한번 더 고정
+    pin:true,
+    scrub:1,
+    onLeave : () => {
+      gsap.to(".intro_first", { opacity: 0 });
+    },
+    onEnterBack : () => {
+      gsap.to(".intro_first", { opacity: 1 });
+    }
+  })
+},{scope:container})
+
+//시작 키보드 타이핑 애니메이션  
 useGSAP(() => {
   // .text-container의 최종 너비(34em)를 기준으로 각 라인의 너비 비율을 계산합니다.
   const tl = gsap.timeline({
     scrollTrigger: {
     trigger: ".intro_first",   // 스크롤 감지할 대상
     start: "top center",       // 뷰포트 기준 시작 위치
-    toggleActions: "play none none reverse" 
+    toggleActions: "play none none reverse",
     // 스크롤 방향에 따른 액션 (play, pause, resume, reverse 등)
   }
-  });
+});
 tl.fromTo(".intro_helloWorld", 
-    { opacity: 0, scale: 0.8, y: 10 }, // 시작 상태: 투명하고, 작고, 약간 아래에 있음
+  { opacity: 0, scale: 0.8, y: 10 }, // 시작 상태: 투명하고, 작고, 약간 아래에 있음
     { 
       opacity: 1, 
       scale: 1, 
@@ -82,7 +105,10 @@ tl.fromTo(".intro_helloWorld",
   );
 
   tl.to(".cascading-indicator",{
-    opacity:1
+    opacity:1,
+     onComplete: () => {
+        document.body.style.overflowY = "auto"; // indicator 뜨는 순간부터 스크롤 허용
+  }
   })
   // 마지막 줄은 커서를 깜빡이게 합니다.
   tl.to(".line-6", {
@@ -92,26 +118,23 @@ tl.fromTo(".intro_helloWorld",
     duration: 0.5,
     ease: "steps(1)",
   });
-
 }, { scope: container });
 
+//스크롤 다운 없애기
 useGSAP(() => {
-  ScrollTrigger.create({
-    trigger: ".intro_second",
-    start: "top bottom",
-    end:"bottom top",
-    scrub: 1,
-    markers: true,
-    onEnter: () => gsap.to(".cascading-indicator", { opacity: 0 }),
-    onLeaveBack: () => gsap.to(".cascading-indicator", { opacity: 1 })
-  });
-}, { scope: container });
-
+    ScrollTrigger.create({
+      trigger:".intro_first",
+      start:"top top",
+      end : "+=10%",
+      onLeave: () => { gsap.to(".cascading-indicator",{ opacity:0 })},
+      onEnterBack: () => { gsap.to(".cascading-indicator",{ opacity:1 })}
+    })
+},{scope:container})
 
   return (
     <div ref={container} className='container mx-auto w-100vw h-[100%] flex flex-col items-center'>
 
-      <div className="intro_first h-screen text-[#d4d4d4] mx-auto text-lg flex flex-col min-h-full justify-center">
+      <div className="intro_first h-screen text-[#d4d4d4] mx-auto text-lg flex flex-col min-h-full justify-center ">
         <div className='intro_helloWorld  mx-auto text-4xl mb-10 text-[#ffe457]' >
           <div>
             I Am ...

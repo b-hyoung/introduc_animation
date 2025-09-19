@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions";
+import type { ChatCompletionCreateParams } from "openai/resources/chat/completions";
 
 // ──────────────────────────────────────────────────────────────────────────────
 // 전역(싱글톤) OpenAI 클라이언트
@@ -32,8 +33,8 @@ export interface CreateResponseOptions {
   temperature?: number;           // 창의성 정도 (낮을수록 좋음)
   max_output_tokens?: number;     // 응답 토큰 상한
   top_p?: number;                 // 샘플링
-  response_format?: any;          // JSON 스키마 강제 등 고급 포맷 옵션
-  metadata?: Record<string, any>; // 추적용 메타데이터
+  response_format?: ChatCompletionCreateParams["response_format"]; // JSON 스키마 강제 등 고급 포맷 옵션
+  metadata?: Record<string, string>; // 추적용 메타데이터 (OpenAI Metadata는 string만 허용)
 }
 
 //인풋이 잘못들어와도 AI를 이해시키기 위해 변환해주는 보호장치

@@ -6,6 +6,12 @@ import { useGSAP } from "@gsap/react";
 import './page.css'
 import { ScrollTrigger } from 'gsap/all';
 
+const profile = {
+  role: "\"개발자\"",
+  skills: ["\"React\"", "\"Next.js\"", "\"FastAPI\""],
+  interests: ["\"AI를 이용한 자동화 툴\"", "\"UX(사용성 편의)\""],
+  traits: "\"실험과 문제 해결을 통해 성장하며, 현실과 연결된 개발을 지향하는 실용적 개발자\""
+};
 
 function Page() {
   const container = useRef(null);
@@ -134,32 +140,30 @@ useGSAP(() => {
   return (
     <div ref={container} className='container mx-auto w-100vw h-[100%] flex flex-col items-center'>
 
-      <div className="intro_first h-screen text-[#d4d4d4] mx-auto text-lg flex flex-col min-h-full justify-center ">
-        <div className='intro_helloWorld  mx-auto text-4xl mb-10 text-[#ffe457]' >
+      <div className="intro_first min-h-screen sm:h-screen text-[#d4d4d4] mx-auto text-[8px] mx-auto lg:text-lg flex flex-col min-h-full justify-center ">
+        <div className='intro_helloWorld  mx-auto text-base lg:text-4xl mb-10 text-[#ffe457]' >
           <div>
             I Am ...
           </div>
         </div>
-        <div className="text-container mx-auto">
+        <div className="text-container mx-auto min-w-[280px] lg:min-w-[550px]  break-words">
           {/** 인트로 설명 */}
           <div className='line-1 mx-auto'>
             <span className='intro_keyword'>let </span><span className='intro_keyword text-red-500'>박형석</span> = <span className='intro_door'>&#123;</span>
           </div>
           <div className='line-2 ml-5'>
-            <span className='intro_keyword'>역할 :</span> <span className='intro_Msg'>"개발자"</span> ,
+            <span className='intro_keyword'>역할 :</span> <span className='intro_Msg'>{profile.role}</span> ,
           </div>
           <div className='line-3 ml-5'>
-            <span className='intro_keyword'>기술 : </span> <span className='intro_Msg'><span className='intro_door_big'>[</span> "React" , "Next.js" , "FastAPI" , ... <span className='intro_door_big'>]</span></span> ,
+            <span className='intro_keyword'>기술 : </span> <span className='intro_Msg'><span className='intro_door_big'>[</span> {profile.skills.map((skill, i) => (<span key={i}>{skill}{i < profile.skills.length - 1 ? ", " : ""}</span>))} <span className='intro_door_big'> ]</span></span> ,
           </div>
           <div className='line-4 ml-5'>
-            <span className='intro_keyword'>관심사 : </span> <span className='intro_Msg'><span className='intro_door_big'>[</span> "AI를 이용한 자동화 툴", "UX(사용성 편의)" <span className='intro_door_big'>]</span></span> ,
+            <span className='intro_keyword'>관심사 : </span> <span className='intro_Msg'><span className='intro_door_big'>[</span> {profile.interests.map((interest, i) => (<span key={i}>{interest}{i < profile.interests.length - 1 ? ", " : ""}</span>))}, ... <span className='intro_door_big'>]</span></span> ,
           </div>
           <div className='line-5 ml-5'>
             <span className='intro_keyword'>성향 : </span>
             <span className='intro_Msg'>
-              <span className='intro_door_big'>[</span> "실험과 문제 해결을 통해 성장하며, <br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            현실과 연결된 개발을 지향하는 실용적 개발자" <span className='intro_door_big'>]</span></span>
+              <span className='intro_door_big'>[</span> {profile.traits} <span className='intro_door_big'>]</span></span>
           </div>
           <div className='line-6 ml-5'><span className='intro_door'>&#125;</span></div>
           <div className="cascading-indicator">

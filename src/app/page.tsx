@@ -13,23 +13,16 @@ function Page() {
   gsap.registerPlugin(ScrollTrigger); // 플러그인 등록
 
 
-  // useGSAP(() => {
-  //   gsap.to(".container",{
-  //     scrollTrigger:{
-  //       trigger: ".container", //요소가 뷰포트에 드러나는 순간부터 애니메이션 작동
-  //       start : "top top", //시작 지점
-  //       markers:true, // 트리거 마커 표시(boolean)
-  //       scrub:false, // 스크롤 다운되면 원래 위치로 돌아감
-  //     },
-  //     x:30,
-  //     y:30,
-  //     rotate:180
-  //    })
-  // },),{scope : container}
-
 useGSAP(() => {
   // .text-container의 최종 너비(34em)를 기준으로 각 라인의 너비 비율을 계산합니다.
-  const tl = gsap.timeline();
+  const tl = gsap.timeline({
+    scrollTrigger: {
+    trigger: ".intro_first",   // 스크롤 감지할 대상
+    start: "top center",       // 뷰포트 기준 시작 위치
+    toggleActions: "play none none reverse" 
+    // 스크롤 방향에 따른 액션 (play, pause, resume, reverse 등)
+  }
+  });
 tl.fromTo(".intro_helloWorld", 
     { opacity: 0, scale: 0.8, y: 10 }, // 시작 상태: 투명하고, 작고, 약간 아래에 있음
     { 
@@ -45,7 +38,7 @@ tl.fromTo(".intro_helloWorld",
   tl.set(".line-1", { borderRightColor: "rgba(255,255,255,0.75)" });
   tl.fromTo(".line-1", 
     { width: "0" }, 
-    { width: "100%", duration: 0.8, ease: "steps(12)" } // 타이핑 속도 조절
+    { width: "100%", duration: 0.8, ease: "steps(9)" } // 타이핑 속도 조절
   );
   tl.to(".line-1", { borderRightColor: "transparent" });
 
@@ -53,7 +46,7 @@ tl.fromTo(".intro_helloWorld",
   tl.set(".line-2", { borderRightColor: "rgba(255,255,255,0.75)" }, "+=0.5");
   tl.fromTo(".line-2", 
     { width: "0" }, 
-    { width: "47%", duration: 1, ease: "steps(20)" }
+    { width: "47%", duration: 1, ease: "steps(15)" }
   );
   tl.to(".line-2", { borderRightColor: "transparent" });
 
@@ -61,7 +54,7 @@ tl.fromTo(".intro_helloWorld",
   tl.set(".line-3", { borderRightColor: "rgba(255,255,255,0.75)" }, "+=0.5");
   tl.fromTo(".line-3", 
     { width: "0" }, 
-    { width: "94%", duration: 1, ease: "steps(45)" }
+    { width: "94%", duration: 1, ease: "steps(40)" }
   );
   tl.to(".line-3", { borderRightColor: "transparent" });
 
@@ -72,15 +65,24 @@ tl.fromTo(".intro_helloWorld",
     { width: "100%", duration: 1, ease: "steps(48)" }
   );
   tl.to(".line-4", { borderRightColor: "transparent" });
-  
-  // --- Line 5 (마지막 줄) ---
+
+  // --- Line 5 ---
   tl.set(".line-5", { borderRightColor: "rgba(255,255,255,0.75)" }, "+=0.5");
   tl.fromTo(".line-5", 
     { width: "0" }, 
-    { width: "4.5%", duration: 0.2, ease: "steps(1)" } // duration 추가
+    { width: "100%", duration: 1, ease: "steps(60)" }
   );
+  tl.to(".line-5", { borderRightColor: "transparent" });
+  
+  // --- Line 6 (마지막 줄) ---
+  tl.set(".line-6", { borderRightColor: "rgba(255,255,255,0.75)" }, "+=0.5");
+  tl.fromTo(".line-6", 
+    { width: "0" }, 
+    { width: "4.5%", ease: "steps(1)" } // duration 추가
+  );
+  
   // 마지막 줄은 커서를 깜빡이게 합니다.
-  tl.to(".line-5", {
+  tl.to(".line-6", {
     borderRightColor: "rgba(255,255,255,0)",
     repeat: 4,
     yoyo: true,
@@ -88,44 +90,62 @@ tl.fromTo(".intro_helloWorld",
     ease: "steps(1)",
   });
 
+  ScrollTrigger.create({
+    trigger: ".intro_first",
+    start: "top center",
+    end: "bottom center",
+    onEnter: () => gsap.to(".cascading-indicator", { opacity: 0 }),
+    onLeaveBack: () => gsap.to(".cascading-indicator", { opacity: 1 })
+  });
+
 }, { scope: container });
 
-  //클릭 이벤트
-  // const onClickGood = contextSafe(() => {
-  // 	gsap.to('.good', { rotation: "+=180" });
-  // });
 
-  let Me = {
-    role: "Developer",
-    skills: ["React", "Next.js", "FastAPI"],
-    interests: ["AI Automation", "UX Development"]
-  }
 
   return (
-    <div ref={container} className='container mx-auto h-screen flex items-center'>
-      <div className="text-[#d4d4d4] mx-auto text-lg flex flex-col">
+    <div ref={container} className='container mx-auto w-100vw h-[100%] flex flex-col items-center'>
+
+      <div className="intro_first h-screen text-[#d4d4d4] mx-auto text-lg flex flex-col min-h-full justify-center">
         <div className='intro_helloWorld  mx-auto text-4xl mb-10 text-[#ffe457]' >
           <div>
-            Who I Am ?
+            I Am ...
           </div>
         </div>
         <div className="text-container mx-auto">
-
+          {/** 인트로 설명 */}
           <div className='line-1 mx-auto'>
-            <span className='intro_keyword'>let </span><span className='intro_keyword'>Me</span> = <span className='intro_door'>&#123;</span>
+            <span className='intro_keyword'>let </span><span className='intro_keyword text-red-500'>박형석</span> = <span className='intro_door'>&#123;</span>
           </div>
           <div className='line-2 ml-5'>
-            <span className='intro_keyword'>role :</span> <span className='intro_Msg'>"Developer"</span> ,
+            <span className='intro_keyword'>역할 :</span> <span className='intro_Msg'>"개발자"</span> ,
           </div>
           <div className='line-3 ml-5'>
-            <span className='intro_keyword'>skills : </span> <span className='intro_Msg'><span className='intro_door_big'>[</span> "React" , "Next.js" , "FastAPI" , ... <span className='intro_door_big'>]</span></span> ,
+            <span className='intro_keyword'>기술 : </span> <span className='intro_Msg'><span className='intro_door_big'>[</span> "React" , "Next.js" , "FastAPI" , ... <span className='intro_door_big'>]</span></span> ,
           </div>
           <div className='line-4 ml-5'>
-            <span className='intro_keyword'>interests : </span> <span className='intro_Msg'><span className='intro_door_big'>[</span> "AI Automation", "UX Development" <span className='intro_door_big'>]</span></span>
+            <span className='intro_keyword'>관심사 : </span> <span className='intro_Msg'><span className='intro_door_big'>[</span> "AI를 이용한 자동화 툴", "UX(사용성 편의)" <span className='intro_door_big'>]</span></span> ,
           </div>
-          <div className='line-5'><span className='intro_door'>&#125;</span></div>
+          <div className='line-5 ml-5'>
+            <span className='intro_keyword'>성향 : </span>
+            <span className='intro_Msg'>
+              <span className='intro_door_big'>[</span> "실험과 문제 해결을 통해 성장하며, <br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            현실과 연결된 개발을 지향하는 실용적 개발자" <span className='intro_door_big'>]</span></span>
+          </div>
+          <div className='line-6 ml-5'><span className='intro_door'>&#125;</span></div>
+          <div className="cascading-indicator">
+          <h3 className='text-center w[100%] mb-5'>Scroll down</h3>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
       </div>
+
+      <div className='intro_skills h-screen w-[100%] bg-white'>
+
+      </div>
+
     </div>
   );
 }

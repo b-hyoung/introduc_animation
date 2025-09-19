@@ -80,7 +80,10 @@ tl.fromTo(".intro_helloWorld",
     { width: "0" }, 
     { width: "4.5%", ease: "steps(1)" } // duration 추가
   );
-  
+
+  tl.to(".cascading-indicator",{
+    opacity:1
+  })
   // 마지막 줄은 커서를 깜빡이게 합니다.
   tl.to(".line-6", {
     borderRightColor: "rgba(255,255,255,0)",
@@ -90,16 +93,19 @@ tl.fromTo(".intro_helloWorld",
     ease: "steps(1)",
   });
 
+}, { scope: container });
+
+useGSAP(() => {
   ScrollTrigger.create({
-    trigger: ".intro_first",
-    start: "top center",
-    end: "bottom center",
+    trigger: ".intro_second",
+    start: "top bottom",
+    end:"bottom top",
+    scrub: 1,
+    markers: true,
     onEnter: () => gsap.to(".cascading-indicator", { opacity: 0 }),
     onLeaveBack: () => gsap.to(".cascading-indicator", { opacity: 1 })
   });
-
 }, { scope: container });
-
 
 
   return (
@@ -142,7 +148,7 @@ tl.fromTo(".intro_helloWorld",
         </div>
       </div>
 
-      <div className='intro_skills h-screen w-[100%] bg-white'>
+      <div className='intro_second h-screen w-[100%] bg-white'>
 
       </div>
 

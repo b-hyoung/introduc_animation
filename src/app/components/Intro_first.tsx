@@ -29,21 +29,18 @@ export default function Intro_first() {
     gsap.registerPlugin(ScrollTrigger); // 플러그인 등록
 
     // 핀 예시
-    useGSAP(() => {
-        ScrollTrigger.create({
-            trigger: ".intro_first",
-            start:"top top",
-            end:"+=90",
-            pin:true,
-            toggleActions: "play none none reverse",
-            onLeave: () => {
-                gsap.to(".intro_first", { opacity: 0 ,duration:3});
-            },
-            onEnterBack: () => {
-                gsap.to(".intro_first", { opacity: 1 });
-            }
-        })
-    }, { scope: container })
+useGSAP(() => {
+  gsap.to(".intro_first", {
+    opacity: 0,
+    scrollTrigger: {
+      trigger: ".intro_first",
+      start: "top top",   // 시작 시점
+      end: "+=200",        // 스크롤 90px 구간 동안
+      scrub: 1,        // 스크롤에 비례해서 opacity 1 → 0
+      pin: true
+    }
+  });
+}, { scope: container });
 
     //시작 키보드 타이핑 애니메이션  
     useGSAP(() => {

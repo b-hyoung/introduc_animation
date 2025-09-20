@@ -10,7 +10,7 @@ export default function Intro_second({}: Props) {
 
   return (
     <div ref={container}>
-        <div className='w-full h-screen bg-gray-500'>
+        <div className='w-full h-screen'>
             <div>My Project</div>
         </div>
 

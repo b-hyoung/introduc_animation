@@ -164,7 +164,7 @@ export default function Intro_second({ }: Props) {
                 />
 
                 {/* 어두운 오버레이 */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-black/60 opacity-30 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* skills */}
                 <div

@@ -17,30 +17,30 @@ export default function Intro_first() {
         role: "\"개발자\"",
         skills: ["\"React\"", "\"Next.js\"", "\"Python\", \"Docker\" , ..."],
         interests: ["\"AI를 이용한 자동화 툴\"", "\"UX(사용성 편의)\""],
-       traits: (
-    <>
-      "실험과 문제 해결을 통해 성장하며,<br />
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;현실과 연결된 개발을 지향하는 실용적 개발자"
-    </>
-  ),
+        traits: (
+            <>
+                "실험과 문제 해결을 통해 성장하며,<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;현실과 연결된 개발을 지향하는 실용적 개발자"
+            </>
+        ),
     };
 
     const { contextSafe } = useGSAP({ scope: container });
     gsap.registerPlugin(ScrollTrigger); // 플러그인 등록
 
     // 핀 예시
-useGSAP(() => {
-  gsap.to(".intro_first", {
-    opacity: 0,
-    scrollTrigger: {
-      trigger: ".intro_first",
-      start: "top top",   // 시작 시점
-      end: "+=200",        // 스크롤 90px 구간 동안
-      scrub: 1,        // 스크롤에 비례해서 opacity 1 → 0
-      pin: true
-    }
-  });
-}, { scope: container });
+    useGSAP(() => {
+        gsap.to(".intro_first", {
+            opacity: 0.7,
+            scrollTrigger: {
+                trigger: ".intro_first",
+                start: "top top",   // 시작 시점
+                end: "+=90%",
+                scrub: 1,        // 스크롤에 비례해서 opacity 1 → 0
+                pin: true
+            }
+        });
+    }, { scope: container });
 
     //시작 키보드 타이핑 애니메이션  
     useGSAP(() => {
@@ -146,28 +146,26 @@ useGSAP(() => {
                         I Am ...
                     </div>
                 </div>
-                 {/* 👇 여기부터 새 요소 */}
-                 
-                        <div className="text-gray-500 text-sm font-mono mt-4 ">
+                {/* 👇 여기부터 새 요소 */}
+
+                <div className="text-gray-500 text-sm font-mono mt-4 ">
                         // version 1.0.0 <br />
                         // last update: 2025-09-20
-                        </div>
-                    <div className="intro-profile flex flex-col items-center gap-6 mt-12">
-                        <img src="/images/b-hyoung_Logo.png" alt="profile" className="w-28 h-28 rounded-full shadow-lg" />
+                </div>
+                <div className="intro-profile flex flex-col items-center gap-6 mt-12">
+                    <h2 className="text-lg md:text-2xl font-bold text-green-400 glitch">
+                        코드로 문제를 풀고, 현실을 연결한다.
+                    </h2>
 
-                        <h2 className="text-lg md:text-2xl font-bold text-green-400 glitch">
-                            코드로 문제를 풀고, 현실을 연결한다.
-                        </h2>
-
-                        <div className="bg-black text-green-300 font-mono text-sm p-4 rounded-md shadow-lg w-[90%] md:w-[500px]">
-                            <p><span className="text-green-500">~/portfolio $</span> whoami</p>
-                            <p className="ml-4">박형석</p>
-                            <p><span className="text-green-500">~/portfolio $</span> skills --list</p>
-                            <p className="ml-4">React, Next.js, Python , TailWindCss , ...</p>
-                        </div>
-
+                    <div className="bg-black text-green-300 font-mono text-sm p-4 rounded-md shadow-lg w-[90%] md:w-[500px]">
+                        <p><span className="text-green-500">~/portfolio $</span> whoami</p>
+                        <p className="ml-4">박형석</p>
+                        <p><span className="text-green-500">~/portfolio $</span> skills --list</p>
+                        <p className="ml-4">React, Next.js, Python , TailWindCss , ...</p>
                     </div>
-                <div className="text-container mx-auto min-w-[280px] lg:min-w-[550px]  break-words">
+
+                </div>
+                <div className="text-container mx-auto min-w-[280px] lg:min-w-[550px]  break-words mt-10">
                     {/** 인트로 설명 */}
                     <div className='line-1 mx-auto'>
                         <span className='intro_keyword'>let </span><span className='intro_keyword text-red-500'>박형석</span> = <span className='intro_door'>&#123;</span>

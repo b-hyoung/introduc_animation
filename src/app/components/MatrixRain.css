@@ -1,0 +1,16 @@
+/* glitch 효과 */
+.glitch {
+  position: relative;
+  color: #0f0;
+  animation: glitch 1s infinite;
+}
+@keyframes glitch {
+  0% { text-shadow: 2px 0 red, -2px 0 blue; }
+  20% { text-shadow: -2px 0 blue, 2px 0 red; }
+  40% { text-shadow: 2px 2px red, -2px -2px blue; }
+  60% { text-shadow: 0 0 red, 0 0 blue; }
+  100% { text-shadow: -2px 2px red, 2px -2px blue; }
+}
+canvas{
+  opacity: 1;
+}

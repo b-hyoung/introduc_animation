@@ -145,7 +145,7 @@ export default function Intro_second({ }: Props) {
     <div ref={container}>
       <div className="intro_second w-full font-jetbrains">
         <section className="projects-section h-screen relative">
-          <div className="absolute top-[15%] left-16 text-3xl md:text-5xl lg:text-6xl font-extrabold text-sky-200 z-20 drop-shadow-lg">
+          <div className="absolute top-[15%] left-[16%] text-3xl md:text-5xl lg:text-6xl font-extrabold text-sky-200 z-20 drop-shadow-lg">
             프로젝트 아카이브
           </div>
 

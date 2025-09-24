@@ -1,0 +1,37 @@
+/* highlight.js 테마 (atom-one-dark) */
+@import 'highlight.js/styles/atom-one-dark.css';
+
+body {
+    background-color: #f8f9fa; /* Velog의 배경색과 유사하게 */
+}
+
+.prose {
+    /* prose 기본 스타일 초기화 */
+    --tw-prose-body: #212529;
+    --tw-prose-headings: #212529;
+    --tw-prose-links: #12b886;
+    --tw-prose-bold: #212529;
+    --tw-prose-quotes: #868e96;
+    /* 코드 스타일링은 highlight.js 테마에 맡깁니다. */
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    font-weight: 700;
+}
+
+/* 코드 블록의 배경색은 highlight.js 테마를 따르도록 합니다. */
+.prose pre {
+    background-color: #282c34; /* atom-one-dark 배경색 */
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+/* 인라인 코드 스타일 */
+.prose code:not(pre > code) {
+    background-color: rgba(27, 31, 35, 0.05);
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    border-radius: 3px;
+    color: #e06c75;
+}
